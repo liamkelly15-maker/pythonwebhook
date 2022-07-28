@@ -1,0 +1,32 @@
+"{
+   "receiver":"webhook",
+   "status":"firing",
+   "alerts":[
+      {
+         "status":"firing",
+         "labels":{
+            "alertname":"HighPodMemory",
+            "severity":"slack"},
+         "annotations":{
+            "summary":"HighMemoryUsage"},
+         "startsAt":"2022-07-26T19:55:58.97Z",
+         "endsAt":"0001-01-01T00:00:00Z",
+         "generatorURL":"http://prometheus-deployment-87cc8fb88-4kgsr:9090/graph?g0.expr=sum%28container_memory_usage_bytes%29+%3E+1",
+         "fingerprint":"f74798f72524fe89"
+      }
+   ],
+   "groupLabels":{
+      "alertname":"HighPodMemory"
+   },
+   "commonLabels":{
+      "alertname":"HighPodMemory",
+      "severity":"slack"
+   },
+   "commonAnnotations":{
+      "summary":"HighMemoryUsage"
+   },
+   "externalURL":"http://alertmanager-78dfd7464f-tdfv9:9093",
+   "version":"4",
+   "groupKey":"{}/{}:{alertname="HighPodMemory"}",
+   "truncatedAlerts":0
+}"

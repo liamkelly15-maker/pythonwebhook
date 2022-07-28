@@ -1,0 +1,9 @@
+faultName: [['labels','alertname']]
+serviceName: [['labels','deployment'],  ['labels','statefulset'],  ['labels','daemonset']]
+createdAt: [['startsAt']]
+expiration: [['endsAt']]
+faultyResource: [['labels','instance']]
+severity: [['labels','severity']]
+description: [['annotations','summary']]
+additional_information:
+  namespace:  [['labels','namespace'], ['labels','kubernetes_namespace']]

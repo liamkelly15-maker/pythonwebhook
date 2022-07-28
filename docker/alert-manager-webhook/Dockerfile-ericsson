@@ -1,0 +1,30 @@
+ARG OS_BASE_IMAGE_NAME=sles
+ARG OS_BASE_IMAGE_REPO=armdocker.rnd.ericsson.se/proj-ldc/common_base_os_release
+ARG OS_BASE_IMAGE_TAG=3.56.0-35
+
+FROM ${OS_BASE_IMAGE_REPO}/${OS_BASE_IMAGE_NAME}:${OS_BASE_IMAGE_TAG}
+
+LABEL maintainer="Team Stellar PDLNEUEDAF@pdl.internal.ericsson.com"
+
+COPY ./src /etc/opt/ericsson/alert-manager-webhook
+COPY image_content/pipe_fifo.sh /usr/local/bin/pipe_fifo.sh
+
+ARG OS_BASE_IMAGE_TAG
+ARG ARM_TOKEN
+ARG STDOUT_REDIRECT_PACKAGE_VERSION
+ARG STDOUT_REDIRECT_BINARY_PKG_URL=https://arm.seli.gic.ericsson.se/artifactory/proj-adp-log-release/com/ericsson/bss/adp/log/stdout-redirect/
+
+RUN zypper addrepo -C -G -f https://arm.sero.gic.ericsson.se/artifactory/proj-ldc-repo-rpm-local/common_base_os/sles/${OS_BASE_IMAGE_TAG}?ssl_verify=no COMMON_BASE_OS_SLES_REPO \
+    && zypper install -l -y curl python3 python3-pip \
+    && zypper clean --all
+
+RUN pip install --no-cache-dir https://github.com/pallets/flask/archive/1.1.2.tar.gz https://github.com/psf/requests/archive/v2.24.0.zip pyyaml
+
+RUN curl -fsSL -o /tmp/stdout-redirect.tar -H "X-JFrog-Art-Api:${ARM_TOKEN}" "${STDOUT_REDIRECT_BINARY_PKG_URL}/${STDOUT_REDIRECT_PACKAGE_VERSION}"/eric-log-libstdout-redirect-golang-cxa30176-"${STDOUT_REDIRECT_PACKAGE_VERSION}".x86_64.tar \
+    && tar -C / -xf /tmp/stdout-redirect.tar \
+    && rm -f /tmp/stdout-redirect.tar
+
+RUN chmod 755 /usr/local/bin/pipe_fifo.sh; chmod 755 /etc/opt/ericsson/alert-manager-webhook/*
+
+EXPOSE 49494
+ENTRYPOINT ["/usr/local/bin/pipe_fifo.sh","/etc/opt/ericsson/alert-manager-webhook/main.py"]

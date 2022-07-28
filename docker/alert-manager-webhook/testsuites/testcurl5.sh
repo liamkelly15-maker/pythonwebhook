@@ -1,0 +1,8 @@
+{'status': 'firing', 'labels': {'alertname': 'KubernetesDeploymentReplicasMismatch', 'app_kubernetes_io_instance': 'eric-
+eo-prod126lns', 'app_kubernetes_io_managed_by': 'Helm', 'app_kubernetes_io_name': 'eric-pm-kube-state-metrics-prod126lns', 'app_kubernetes_io_version': '1.0.1-3', 'chart': 'eric-pm-kube-state-metrics-1.0.1-3', 'deployment':
+'eric-eo-cm-core', 'instance': '192.168.105.82:49494', 'job': 'eric-pm-kube-state-metrics-prod126lns', 'kubernetes_name': 'eric-pm-kube-state-metrics-prod126lns', 'kubernetes_namespace': 'eric-eo-cm-prod126lns', 'namespace':
+'eric-eo-cm-prod126lns', 'severity': 'warning'}, 'annotations': {'description': 'Deployment Replicas mismatch\n  VALUE = 2\n  LABELS = map[__name__:kube_deployment_spec_replicas app_kubernetes_io_instance:eric-eo-prod126lns
+app_kubernetes_io_managed_by:Helm app_kubernetes_io_name:eric-pm-kube-state-metrics-prod126lns app_kubernetes_io_version:1.0.1-3 chart:eric-pm-kube-state-metrics-1.0.1-3 deployment:eric-eo-cm-core instance:192.168.105.82:49
+494 job:eric-pm-kube-state-metrics-prod126lns kubernetes_name:eric-pm-kube-state-metrics-prod126lns kubernetes_namespace:eric-eo-cm-prod126lns namespace:eric-eo-cm-prod126lns]', 'summary': 'Kubernetes Deployment replicas mis
+match (instance 192.168.105.82:49494)'}, 'startsAt': '2021-12-09T15:17:39.809511921Z', 'endsAt': '0001-01-01T00:00:00Z', 'generatorURL': '/metrics/viewer/graph?g0.expr=kube_deployment_spec_replicas%7Bnamespace%3D%22eric-eo-c
+m-prod126lns%22%7D+%21%3D+kube_deployment_status_replicas_available%7Bnamespace%3D%22eric-eo-cm-prod126lns%22%7D&g0.tab=1', 'fingerprint': '4360dfad1e7c9977'}
