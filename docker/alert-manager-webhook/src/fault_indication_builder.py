@@ -31,6 +31,13 @@ class FaultIndicationBuilder:
         self.logger.debug("Alert details from notification received :{}".format(alert))
         fault_indication = {}
 
+        """
+        check if the mapping.yaml key is in a dict or list
+        remember that mapping[key] = value of the key so this is usually a list 
+        so he checks if the mapping[key] is a list and that the length of list (there is 1 dict in mapping.yaml
+        for additional information
+        """
+
         if self.mapping:
             for key in self.mapping:
                 if isinstance(self.mapping[key], list) and len(self.mapping[key]) > 0:
@@ -59,6 +66,13 @@ class FaultIndicationBuilder:
 
         self.logger.info("Fault Indication Built from Alarm :{}".format(fault_indication))
         return fault_indication
+
+    """
+        the mapping_keys are the values on the key in mapping.yaml 
+        if more than 1 mapping key is provided the loop will exit once it finds  match
+        say the mapping keys are [['labels','deployment'],  ['labels','statefulset'],  ['labels','daemonset']]
+        itf it finds say labels:statefulset then it exits and returns the value of this            
+    """
 
     def get_mapped_value(self, alert, mapping_keys):
         if isinstance(mapping_keys, list):

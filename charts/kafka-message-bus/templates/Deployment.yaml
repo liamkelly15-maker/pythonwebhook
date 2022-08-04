@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: kafka
-        image: bitnami/kafka:latest
+        image: 0872/kafka:latest
         ports:
         - name: kafka
           containerPort: 49494
@@ -26,12 +26,5 @@ spec:
             limits:
               cpu: 1
               memory: 1Gi
-        volumeMounts:
-        - name: alarm-mapping-config-volume
-          mountPath: /etc/opt/ericsson/mapping.yml
-          subPath: mapping.yml
-      volumes:
-      - name: alarm-mapping-config-volume
-        configMap:
-          name: alarm-mapping-config
+
 

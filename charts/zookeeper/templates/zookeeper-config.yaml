@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zookeeper-config
+data:
+  zoo.cfg: |
+    tickTime=2000
+    dataDir=/data/zookeeper
+    dataLogDir=/opt/zookeeper/logs
+    clientPort=2181
+    maxClientCnxns=60
