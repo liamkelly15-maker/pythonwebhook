@@ -1,3 +1,6 @@
+#WHY DOES THIS SERVICE REQUIRE A NEW ROLE AND BINDING TO SERVICE ACCOUNT AND NOT OTHER SERVICES ?
+#clusterrole could be simple as --clusterrole=admin
+#I can create a ole or a ClusterRole - lots of Roles and ClusterRolees already exist in the cluster and you can bind to these
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -19,14 +22,19 @@ rules:
 - nonResourceURLs: ["/metrics"]
   verbs: ["get"]
 ---
+#2 type of rolebinding... clusterrolebinding & rolebinding
+#for example an adp service will not be allowed to create a clusterrole
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: prometheus
+#the role that I am binding  is a clusterrole called prometheus - this could also be a role
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: prometheus
+#subjects targets the right location - using a service account named default not a particular USER
+#the service account will point to a token in a secret which is required by the K8s API server
 subjects:
 - kind: ServiceAccount
   name: default
