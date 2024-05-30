@@ -17,3 +17,4 @@ CMD ["/etc/opt/ericsson/alert-manager-webhook/main.py"]
 ENTRYPOINT ["python"]
 
 # the flask webserver should keep the script running
+#test commit
